@@ -80,9 +80,45 @@ public class Method
 
         return count;
     }
-    
+
+    [XmlIgnore]    
     public uint Token;
+
+    [XmlIgnore]
     public uint Hash;
+
+    [XmlElement(ElementName="Token")]
+    public string HexToken
+    {
+        get
+        {
+            // convert int to hex representation
+            return Token.ToString("x");
+        }
+        set
+        {
+            // convert hex representation back to int
+            Token = uint.Parse(value, 
+                System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
+    [XmlElement(ElementName="Hash")]
+    public string HexHash
+    {
+        get
+        {
+            // convert int to hex representation
+            return Hash.ToString("x");
+        }
+        set
+        {
+            // convert hex representation back to int
+            Hash = uint.Parse(value, 
+                System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
     public string Name;
     public uint InlineCount;
     public uint HotSize;
@@ -98,8 +134,44 @@ public class Method
 
 public class Inline
 {
+    [XmlIgnore]
     public uint Token;
+
+    [XmlIgnore]
     public uint Hash;
+
+    [XmlElement(ElementName = "Token")]
+    public string HexToken
+    {
+        get
+        {
+            // convert int to hex representation
+            return Token.ToString("x");
+        }
+        set
+        {
+            // convert hex representation back to int
+            Token = uint.Parse(value,
+                System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
+    [XmlElement(ElementName = "Hash")]
+    public string HexHash
+    {
+        get
+        {
+            // convert int to hex representation
+            return Hash.ToString("x");
+        }
+        set
+        {
+            // convert hex representation back to int
+            Hash = uint.Parse(value,
+                System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
     public uint Offset;
     public uint CollectData;
     public string Reason;
@@ -216,6 +288,10 @@ public class P
         catch (System.Exception ex)
         {
             Console.WriteLine("Xml deserialization failed: " + ex.Message);
+            if (ex.InnerException != null)
+            {
+                Console.WriteLine("... " + ex.InnerException.Message);
+            }
             return;
         }
         
