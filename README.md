@@ -47,3 +47,19 @@ repo.
 # Sparse solvers
 
 Useful for investigating how to do profile reconstruction.
+
+# Profile Data Analyzer
+
+Tool to analyze profile files produced by jit instrumentation.
+
+You can produce these files by running the jit with the following settings
+```
+COMPlus_TieredPgo=1
+COMPlus_PGODataPath=<some file name>
+COMPlus_WritePGOData=1
+```
+and possibly adding in
+```
+COMPlus_TC_QuickJitForLoops=1
+```
+
